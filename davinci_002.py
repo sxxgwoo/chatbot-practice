@@ -16,7 +16,7 @@ while True:
       print("=========================END=========================")
       break
     else :
-      text = prompt_design(text_temp)
+      text = prompt_redesign(text_temp)
       
       #openai 대답호출
       response = openai.Completion.create(
@@ -51,8 +51,11 @@ while True:
       i=0
       while True:
         if i < t:
-          backup = json_data[str(tr-t+1+i)]
-          print(backup)
+          backup_you = 'You:'+json_data[str(tr-t+1+i)][0]
+          backup_friend = 'Friend:'+json_data[str(tr-t+1+i)][1]
+          
+          print(backup_you)
+          print(backup_friend)
           i+=1
         elif i >= t:
           break 
