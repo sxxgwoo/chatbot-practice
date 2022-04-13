@@ -40,14 +40,14 @@ while True:
     break
 
   elif co =="T" and os.path.exists(('./data_'+name+'.json')):
+    with open('.\data_'+str(name)+'.json','r') as f:
+      json_data = json.load(f)
+    tr = len(json_data)
     t = int(input("How many turns?:"))
-    if t <= 0:
+    if t <= 0 or t > tr:
       print("Try again")
       continue 
-    elif t>0:
-      with open('.\data_'+str(name)+'.json','r') as f:
-        json_data = json.load(f)
-      tr = len(json_data)
+    elif tr>=t>0:     
       i=0
       while True:
         if i < t:
@@ -55,13 +55,12 @@ while True:
           print(backup)
           i+=1
         elif i >= t:
-          break
-      print("=================There's no file==================") 
+          break 
       break
     else:
       print("Try again")
       continue
   else:
-    print("========================wrong========================")
+    print("=================There's no file==================")
     break
 
