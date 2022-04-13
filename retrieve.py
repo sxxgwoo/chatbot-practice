@@ -12,7 +12,7 @@ class retrieve:
         retrieve.a[self.turns]=[self.text_temp,self.res]
 
         if os.path.exists('./data_'+name+'.json'):
-            with open('./data_sw.json','r') as json_file:
+            with open('./data_'+name+'.json','r') as json_file:
                 json_data = json.load(json_file)
             tur = len(json_data)
 
@@ -22,9 +22,4 @@ class retrieve:
         else:
             with open('./data_'+name+'.json','w') as f:
                 json.dump(retrieve.a,f,ensure_ascii=False,indent=4)
-   
-    def show(self):          
-            
-        print(self.turns)
-        # print(retrieve.a)
    
