@@ -51,7 +51,7 @@ while True:
       i=0
       while True:
         if i < t:
-          backup = json_data[str(tr-i)]
+          backup = json_data[str(tr-t+1+i)]
           print(backup)
           i+=1
         elif i >= t:
