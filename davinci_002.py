@@ -16,7 +16,7 @@ while True:
       print("=========================END=========================")
       break
     else :
-      text = prompt_redesign(text_temp)
+      text = prompt_redesign(text_temp,name)
       
       #openai 대답호출
       response = openai.Completion.create(
