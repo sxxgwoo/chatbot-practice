@@ -3,22 +3,23 @@ import openai
 from retrieve import *
 from prompt import *
 
-openai.api_key = "my_api_key"
+openai.api_key = "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"
 
 name = input("name:")
+term = input("term?:")
 co = input("what do you want?(Y:start,N:Stop,T:Backup):")
 
 while True:
-  
+  # Y 입력시 대화시작
   if co =="Y":
     text_temp = input("You:")
     if text_temp == 'stop':
       print("=========================END=========================")
       break
     else :
-      text = prompt_redesign(text_temp,name)
+      text = prompt_redesign(text_temp,name,term)
       
-      #openai 대답호출
+    # openai 대답호출
       response = openai.Completion.create(
       engine="text-davinci-002",
       prompt=text,
@@ -34,19 +35,29 @@ while True:
       print("Friend:"+ res)
       turns_real=retrieve(name,text_temp,res)
       
-    
+  # N 입력시 대화종료
   elif co =="N":
     print("=========================END=========================") 
     break
-
+  # T 입력시 대화 백업
   elif co =="T" and os.path.exists(('./data_'+name+'.json')):
     with open('.\data_'+str(name)+'.json','r') as f:
       json_data = json.load(f)
     tr = len(json_data)
     t = int(input("How many turns?:"))
-    if t <= 0 or t > tr:
-      print("Try again")
-      continue 
+    if t==-1:
+      i=0
+      while True:
+        if tr>i:
+          backup_you = 'You:'+json_data[str(i+1)][0]
+          backup_friend = 'Friend:'+json_data[str(i+1)][1]
+          
+          print(backup_you)
+          print(backup_friend)
+          i+=1
+        elif tr<=i: 
+          break
+      break
     elif tr>=t>0:     
       i=0
       while True:
@@ -63,7 +74,6 @@ while True:
     else:
       print("Try again")
       continue
-  else:
+  else: # 대화 백업요청시 입력한 사람의 대화가 없을 경우
     print("=================There's no file==================")
     break
-
