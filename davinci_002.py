@@ -3,7 +3,7 @@ import openai
 from retrieve import *
 from prompt import *
 
-openai.api_key = "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"
+openai.api_key = ""
 
 name = input("name:")
 term = input("term?:")
